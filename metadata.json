@@ -1,0 +1,6 @@
+{
+  "name": "MediCare Operations Core",
+  "description": "Indian online pharmacy and healthcare e-commerce administration platform for multi-hub inventory, FEFO batch control, prescription verification, GST billing, and clinical telehealth operations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

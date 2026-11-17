@@ -1,0 +1,2081 @@
+# PROJECT: MEDICARE — COMPLETE FUNCTIONAL PHARMACY ADMINISTRATION WEBSITE
+
+## 1. YOUR ROLE
+
+Act as a senior full-stack software architect, expert React and TypeScript developer, backend engineer, database architect, UI/UX engineer, and healthcare e-commerce platform specialist.
+
+Your task is to transform the entire existing Google Stitch-generated MediCare admin UI project into a complete, professional, attractive, responsive, and fully functional pharmacy administration website.
+
+You are not being asked to create a new design.
+
+The UI has already been designed in Google Stitch and exported into this project.
+
+Your responsibility is to understand the existing project and implement the actual functionality behind every screen, component, form, button, table, filter, dashboard, chart, modal, drawer, and navigation item.
+
+The final application must behave like a real pharmacy management platform.
+
+Do not deliver a static prototype.
+
+Do not leave placeholder buttons.
+
+Do not implement fake interactions that only change the appearance without performing the expected operation.
+
+Do not replace the existing Stitch UI with a generic admin template.
+
+Build the complete application using the existing project as the foundation.
+
+---
+
+# 2. FIRST STEP: ANALYZE THE ENTIRE PROJECT
+
+Before writing or modifying any code, thoroughly inspect the entire project.
+
+Do not start coding immediately.
+
+Inspect:
+
+1. All project folders.
+2. All source files.
+3. All React components.
+4. All page components.
+5. All layouts.
+6. All routing files.
+7. All CSS and styling files.
+8. All images and assets.
+9. All icons.
+10. All installed dependencies.
+11. All configuration files.
+12. All existing mock data.
+13. All existing API integrations.
+14. All reusable UI components.
+15. All Google Stitch-generated design assets.
+
+Understand the existing architecture.
+
+Identify:
+- Framework and version.
+- Programming language.
+- Build tool.
+- Routing approach.
+- Styling framework.
+- Component architecture.
+- State management.
+- Available dependencies.
+- Existing backend connections.
+- Existing authentication implementation.
+
+Create an internal understanding of the complete application before making changes.
+
+If the project already contains an implementation of a particular feature, improve and complete it instead of creating a duplicate.
+
+Do not delete existing files unnecessarily.
+
+Do not remove existing working features.
+
+Do not replace existing dependencies without a strong technical reason.
+
+Do not overwrite the original visual design.
+
+If you discover broken imports, duplicated components, or architectural problems, fix them carefully while preserving the existing functionality.
+
+After analyzing the project, establish an implementation plan and proceed with development.
+
+Do not stop after producing an analysis report.
+
+---
+
+# 3. MOST IMPORTANT REQUIREMENT: PRESERVE THE GOOGLE STITCH UI
+
+The existing Google Stitch designs are the source of truth.
+
+You must preserve:
+
+- Existing page layouts.
+- Sidebar design.
+- Header design.
+- Navigation structure.
+- Typography.
+- Color palette.
+- Button styles.
+- Card designs.
+- Table designs.
+- Forms.
+- Modal layouts.
+- Icons.
+- Spacing.
+- Border radius.
+- Shadows.
+- Visual hierarchy.
+- Responsive design decisions.
+- Page-specific visual patterns.
+
+Use the existing components and assets wherever possible.
+
+Do not redesign the application from scratch.
+
+Do not simplify detailed screens into generic layouts.
+
+Do not replace custom UI with basic HTML tables or unstyled forms.
+
+Do not remove visual details because implementation is easier without them.
+
+If a screen needs improvement, make the smallest necessary changes while preserving its existing design language.
+
+If a UI component is missing functionality, implement that functionality inside the existing component.
+
+The final application must look as close as possible to the Google Stitch design.
+
+---
+
+# 4. PRODUCT OVERVIEW
+
+Product name: MediCare
+
+Product type: Indian online pharmacy and healthcare e-commerce administration platform.
+
+Business model: Initially single-vendor, with an architecture that can support multiple vendors and warehouses in the future.
+
+The customer-facing MediCare website handles medicine purchases, healthcare products, prescriptions, orders, and doctor consultations.
+
+This admin website manages the complete business operation behind that customer website.
+
+The admin application must support:
+
+- Super administrators.
+- Administrators.
+- Pharmacists.
+- Inventory managers.
+- Order managers.
+- Finance managers.
+- Marketing managers.
+- Customer support agents.
+- Analysts.
+
+The application should be modular, scalable, maintainable, and easy to extend.
+
+---
+
+# 5. TECHNOLOGY AND ARCHITECTURE
+
+First inspect the existing stack.
+
+Use the existing framework, dependencies, and project architecture whenever they are suitable.
+
+Do not unnecessarily migrate the project.
+
+If the project uses React and TypeScript, continue with React and TypeScript.
+
+Recommended architecture when compatible with the existing project:
+
+Frontend:
+- React.
+- TypeScript.
+- Existing build tool, preferably Vite if already configured.
+- React Router for routing if not already implemented.
+- Existing CSS/Tailwind styling.
+- Lucide React or existing icon library.
+- Recharts for analytics if already available.
+- React Hook Form and Zod for forms and validation, if compatible.
+
+State management:
+- Existing state management solution.
+- Zustand or Context API if no suitable solution exists.
+
+Data layer:
+- Centralized API/service layer.
+- Typed models and interfaces.
+- Centralized error handling.
+- Loading and success states.
+- Pagination and filtering utilities.
+
+Persistence:
+- Use the existing backend and database if available.
+- If no backend exists, implement a clearly separated mock service layer with persistent demo data.
+- Use IndexedDB where appropriate for locally stored files.
+- Use LocalStorage only for non-sensitive preferences and suitable demo state.
+
+Backend:
+- Reuse the existing backend if present.
+- If no backend exists, keep the frontend backend-ready with clean API interfaces.
+- Do not invent API endpoints and pretend that they are connected.
+- Do not expose API secrets or private keys in frontend code.
+
+Database:
+If a backend/database already exists, inspect and preserve its schema where possible.
+
+If a database must be designed, use a relational model with clear relationships and migrations. Prefer PostgreSQL for a production backend.
+
+Important:
+The application must have a clear distinction between:
+1. A connected production backend.
+2. A locally persisted demonstration mode.
+
+If running in demo mode, the UI should still work end-to-end using realistic persistent data, but must not claim that real payments, SMS, emails, prescription verification, or external integrations have occurred.
+
+Do not silently mix demo and production modes.
+
+---
+
+# 6. APPLICATION ARCHITECTURE
+
+Create a clean and maintainable application architecture.
+
+Organize the application into logical modules.
+
+Suggested structure, adapted to the existing project:
+
+src/
+  assets/
+  components/
+    common/
+    layout/
+    tables/
+    forms/
+    charts/
+    modals/
+    drawers/
+    notifications/
+  layouts/
+    AdminLayout/
+    AuthLayout/
+  pages/
+    auth/
+    dashboard/
+    products/
+    categories/
+    brands/
+    inventory/
+    batches/
+    warehouses/
+    suppliers/
+    purchase-orders/
+    orders/
+    prescriptions/
+    customers/
+    payments/
+    refunds/
+    returns/
+    delivery/
+    consultations/
+    doctors/
+    coupons/
+    campaigns/
+    banners/
+    reviews/
+    support/
+    notifications/
+    analytics/
+    staff/
+    roles/
+    activity-logs/
+    settings/
+  services/
+  hooks/
+  store/
+  types/
+  utils/
+  routes/
+
+Do not force this exact structure if the project already has a good architecture.
+
+Avoid:
+- A giant App.tsx.
+- Duplicate business logic.
+- Repeated API calls inside unrelated components.
+- Hardcoded data scattered across pages.
+- Unnecessary prop drilling.
+- Repeated CSS.
+- Unstructured state.
+- Components containing several unrelated business modules.
+
+Create reusable components and shared services.
+
+Use strong TypeScript typing.
+
+Avoid using `any` unless absolutely necessary.
+
+---
+
+# 7. AUTHENTICATION AND ADMIN ACCESS
+
+Implement the complete admin authentication experience.
+
+Pages:
+- Login.
+- Forgot password.
+- Reset password.
+- Two-factor authentication UI, if supported by the backend.
+- Session expired.
+- Access denied.
+
+Requirements:
+
+1. Login form validation.
+2. Email validation.
+3. Password visibility toggle.
+4. Authentication loading state.
+5. Invalid credential feedback.
+6. Successful login redirection.
+7. Logout.
+8. Protected routes.
+9. Session handling.
+10. Role-based navigation.
+11. Unauthorized page protection.
+
+If a backend authentication service exists, integrate it properly.
+
+If not, implement a clearly labeled demo authentication mechanism using seeded demo users.
+
+Never treat a client-side role check as production security.
+
+Real authentication and authorization must be enforced on the server.
+
+Do not store plaintext passwords in LocalStorage.
+
+Create an initial demo login experience with clear demo credentials only if needed, and do not expose production credentials.
+
+---
+
+# 8. ROLE-BASED ACCESS CONTROL
+
+Implement a centralized permission system.
+
+Create these roles:
+
+1. Super Admin.
+2. Administrator.
+3. Pharmacist.
+4. Inventory Manager.
+5. Order Manager.
+6. Finance Manager.
+7. Marketing Manager.
+8. Customer Support.
+9. Analyst.
+
+Permissions must support:
+
+- View.
+- Create.
+- Edit.
+- Delete.
+- Approve.
+- Export.
+- Manage.
+
+Examples:
+
+Pharmacist:
+- View prescriptions.
+- Review prescriptions.
+- Approve or reject prescriptions.
+- Request clarification.
+- View permitted order information.
+
+Inventory Manager:
+- View inventory.
+- Adjust stock.
+- Manage batches.
+- Manage warehouses.
+- Manage stock transfers.
+- Manage purchase orders.
+
+Order Manager:
+- View orders.
+- Process orders.
+- Update fulfillment status.
+- Manage delivery workflows.
+
+Finance Manager:
+- View transactions.
+- Manage refunds.
+- Review payment records.
+- Export financial reports.
+
+Marketing Manager:
+- Manage coupons.
+- Manage campaigns.
+- Manage banners.
+- Moderate permitted promotional content.
+
+Customer Support:
+- View permitted customer information.
+- Manage support tickets.
+- View relevant order information.
+
+Analyst:
+- View authorized analytics.
+- Export permitted reports.
+
+Implement permissions centrally.
+
+Do not duplicate permission checks throughout unrelated components.
+
+Hide unauthorized actions from the UI and enforce the same restrictions on the backend when connected.
+
+---
+
+# 9. DASHBOARD — COMPLETE FUNCTIONALITY
+
+Implement the dashboard using real data from the application's data layer.
+
+The dashboard must not display hardcoded numbers once the application has initialized its dataset.
+
+Implement:
+
+## KPI Cards
+- Total Revenue.
+- Total Orders.
+- Total Customers.
+- Average Order Value.
+- Pending Orders.
+- Pending Prescriptions.
+- Low Stock Products.
+- Expiring Batches.
+
+Calculate these from the underlying records.
+
+## Revenue Chart
+
+Support:
+- Daily.
+- Weekly.
+- Monthly.
+- Yearly.
+
+Implement:
+- Date filters.
+- Previous-period comparison.
+- Dynamic chart data.
+- Tooltips.
+- Legends.
+
+## Sales Overview
+
+Calculate:
+- Revenue by category.
+- Revenue by product.
+- Revenue by brand.
+- Payment method breakdown.
+- Order status breakdown.
+
+## Recent Orders
+
+Load real application order records.
+
+Allow users to open order details.
+
+## Pending Actions
+
+Calculate and display:
+- Pending prescriptions.
+- Orders awaiting processing.
+- Low-stock products.
+- Expiring batches.
+- Refund requests.
+- Open support tickets.
+
+Each item must navigate to its relevant module.
+
+## Top Selling Products
+
+Calculate:
+- Units sold.
+- Revenue.
+- Product ranking.
+- Trend information where data is available.
+
+## Recent Activity
+
+Display real administrative actions recorded in the activity log.
+
+All dashboard metrics and charts must update after relevant operations.
+
+For example:
+- Creating an order updates order counts.
+- Changing an order to delivered updates delivery statistics.
+- Adding a product updates catalogue statistics.
+- Adjusting stock updates inventory cards.
+- Approving a prescription updates prescription statistics.
+
+---
+
+# 10. PRODUCT MANAGEMENT
+
+Implement:
+
+- Product listing.
+- Product details.
+- Add product.
+- Edit product.
+- Delete/archive product.
+- Product search.
+- Category filtering.
+- Brand filtering.
+- Status filtering.
+- Stock filtering.
+- Price filtering.
+- Sorting.
+- Pagination.
+- Bulk selection.
+- Bulk actions.
+- Image management.
+- Product variants.
+- Bulk import/export.
+
+Product model should support:
+
+- ID.
+- Product name.
+- Slug.
+- SKU.
+- Barcode.
+- Description.
+- Short description.
+- Category.
+- Subcategory.
+- Brand.
+- Manufacturer.
+- Generic name.
+- Composition.
+- Strength.
+- Dosage form.
+- Pack size.
+- MRP.
+- Selling price.
+- Cost price.
+- Tax configuration.
+- Images.
+- Prescription requirement.
+- Storage instructions.
+- Stock status.
+- Publishing status.
+- Created date.
+- Updated date.
+
+Product creation should include:
+
+1. Basic information.
+2. Classification.
+3. Pricing.
+4. Product images.
+5. Medicine information.
+6. Inventory information.
+7. Publishing settings.
+
+Validation:
+- Required fields.
+- Valid price.
+- Selling price cannot exceed MRP unless explicitly supported by business rules.
+- Valid SKU.
+- Valid image formats.
+- Correct numeric values.
+
+Product creation must actually add a product to the central data store.
+
+Editing must update the existing product.
+
+Deleting or archiving must update every relevant screen.
+
+The product must appear in:
+- Product listings.
+- Search results.
+- Category pages.
+- Brand pages.
+- Inventory views.
+- Product analytics.
+
+Use shared data services so that all pages remain synchronized.
+
+---
+
+# 11. CATEGORY AND BRAND MANAGEMENT
+
+Implement complete CRUD functionality for categories and brands.
+
+Categories:
+- Create.
+- Read.
+- Update.
+- Archive/delete.
+- Parent-child hierarchy.
+- Image upload.
+- Slug.
+- Description.
+- Display ordering.
+- Status.
+
+Brands:
+- Create.
+- Read.
+- Update.
+- Archive/delete.
+- Brand logo.
+- Description.
+- Manufacturer details.
+- Featured status.
+
+When a category or brand is changed, the changes must appear in product forms and filters.
+
+Prevent accidental deletion of categories or brands that are still referenced by products.
+
+Provide a clear reassignment or archive workflow.
+
+---
+
+# 12. INVENTORY MANAGEMENT
+
+Implement a proper inventory management system.
+
+Features:
+- Inventory overview.
+- Stock listing.
+- Stock details.
+- Stock adjustments.
+- Low-stock alerts.
+- Out-of-stock alerts.
+- Stock movement history.
+- Batch management.
+- Expiry management.
+- Warehouse management.
+- Stock transfers.
+- Inventory reports.
+
+Inventory model:
+
+- Product ID.
+- SKU.
+- Warehouse ID.
+- Batch ID.
+- Available quantity.
+- Reserved quantity.
+- Damaged quantity.
+- Reorder level.
+- Stock value.
+- Updated timestamp.
+
+## Batch Management
+
+Each batch should contain:
+
+- Batch number.
+- Product.
+- Manufacturer.
+- Manufacturing date.
+- Expiry date.
+- Received quantity.
+- Available quantity.
+- Cost price.
+- Supplier.
+- Warehouse.
+- Batch status.
+
+## FEFO
+
+Implement First Expiry, First Out logic.
+
+The system should prioritize the earliest valid expiry batch for allocation.
+
+Do not allow expired batches to be allocated for sale.
+
+Do not allow negative inventory.
+
+Prevent stock adjustments from producing invalid quantities.
+
+## Stock Adjustment
+
+Support:
+- Received stock.
+- Damaged stock.
+- Expired stock.
+- Corrections.
+- Returned stock.
+
+Require:
+- Product.
+- Batch.
+- Warehouse.
+- Quantity.
+- Reason.
+- Notes.
+- Staff identity.
+
+Every stock adjustment must create a stock movement record.
+
+## Stock Transfer
+
+Implement:
+- Transfer request.
+- Source warehouse.
+- Destination warehouse.
+- Product.
+- Batch.
+- Quantity.
+- Approval.
+- Dispatch.
+- Receipt confirmation.
+
+Maintain accurate stock balances.
+
+Do not simply change the displayed quantity without recording the movement.
+
+---
+
+# 13. SUPPLIERS AND PURCHASE ORDERS
+
+Implement complete supplier and purchase-order workflows.
+
+Supplier functionality:
+- Create.
+- Edit.
+- View.
+- Archive.
+- Search.
+- Filter.
+- Supplier details.
+- Purchase history.
+- Outstanding balance.
+
+Supplier information:
+- Name.
+- Contact person.
+- Email.
+- Phone.
+- GSTIN.
+- Address.
+- Payment terms.
+- Supplied products.
+- Status.
+
+Purchase order functionality:
+
+1. Create purchase order.
+2. Add products.
+3. Select supplier.
+4. Enter quantities.
+5. Calculate costs.
+6. Calculate applicable taxes.
+7. Submit for approval.
+8. Approve or reject.
+9. Record expected delivery.
+10. Receive goods.
+11. Create goods received record.
+12. Update stock and batches.
+13. Update purchase history.
+
+Do not update inventory merely because a purchase order was created.
+
+Inventory should update only after goods are recorded as received.
+
+Prevent duplicate goods receipt for the same quantity.
+
+---
+
+# 14. ORDER MANAGEMENT
+
+Implement complete order processing.
+
+Features:
+- All orders.
+- New orders.
+- Processing.
+- Confirmed.
+- Packed.
+- Shipped.
+- Delivered.
+- Cancelled.
+- Order details.
+- Invoice.
+- Packing slip.
+- Order timeline.
+
+Order data:
+
+- Order ID.
+- Customer ID.
+- Order date.
+- Order items.
+- Subtotal.
+- Discount.
+- Tax.
+- Shipping fee.
+- Total.
+- Payment method.
+- Payment status.
+- Fulfillment status.
+- Prescription status.
+- Delivery information.
+
+Order detail page must display:
+
+- Customer information.
+- Product information.
+- Quantities.
+- Pricing.
+- Payment details.
+- Prescription information.
+- Delivery information.
+- Invoice.
+- Order history.
+- Timeline.
+
+## Order State Management
+
+Implement validated status transitions.
+
+Example:
+
+Placed → Confirmed → Processing → Packed → Shipped → Out for Delivery → Delivered.
+
+Cancellation must follow applicable business rules.
+
+Do not allow arbitrary invalid transitions.
+
+Require confirmation for important status changes.
+
+Record:
+- Previous status.
+- New status.
+- Staff member.
+- Timestamp.
+- Reason.
+
+## Order Inventory Integration
+
+When an order is created:
+- Validate stock.
+- Reserve stock where the business workflow requires it.
+- Prevent overselling.
+- Keep order item and inventory records synchronized.
+
+When an order is cancelled:
+- Release or restore reserved inventory according to its actual fulfillment state.
+
+When an order is shipped:
+- Deduct the appropriate allocated inventory according to the defined inventory workflow.
+
+Avoid double deductions.
+
+Implement transaction-safe operations on the backend when available.
+
+---
+
+# 15. PRESCRIPTION MANAGEMENT
+
+This module is critical.
+
+Implement:
+
+- Prescription dashboard.
+- Prescription listing.
+- Pending prescriptions.
+- Approved prescriptions.
+- Rejected prescriptions.
+- Prescription details.
+- Document preview.
+- Pharmacist assignment.
+- Review history.
+
+Prescription records should support:
+
+- Prescription ID.
+- Customer ID.
+- Order ID.
+- Document reference.
+- Upload timestamp.
+- Review status.
+- Assigned pharmacist.
+- Reviewer.
+- Review timestamp.
+- Review notes.
+- Rejection reason.
+- Clarification request.
+
+## Review Workflow
+
+Statuses:
+
+- Uploaded.
+- Pending Review.
+- Under Review.
+- Approved.
+- Rejected.
+- Clarification Requested.
+
+Implement:
+
+1. Open prescription.
+2. Preview document.
+3. Review information.
+4. Assign pharmacist.
+5. Approve.
+6. Reject.
+7. Request clarification.
+8. Record review history.
+
+Important:
+
+- Only authorized pharmacist users may approve prescriptions.
+- Uploading a document must never automatically approve it.
+- Rejection must require a reason.
+- Clarification must require an explanation.
+- Record the identity of the reviewer.
+- Record timestamps.
+- Preserve an audit trail.
+- Ensure prescription-linked orders cannot bypass required review.
+
+Prescription documents must not be made publicly accessible.
+
+Do not store sensitive prescription documents in plain LocalStorage.
+
+Use secure private storage in a real backend.
+
+If implementing demo mode, use clearly identified sample documents and simulated review states.
+
+Do not represent automated checks as professional pharmacist verification.
+
+---
+
+# 16. CUSTOMER MANAGEMENT
+
+Implement:
+
+- Customer listing.
+- Customer search.
+- Customer filters.
+- Customer details.
+- Customer editing.
+- Customer order history.
+- Customer addresses.
+- Customer reviews.
+- Customer support history.
+- Customer activity.
+
+Customer data:
+- Customer ID.
+- Name.
+- Email.
+- Phone.
+- Registration date.
+- Account status.
+- Order count.
+- Total spending.
+- Last order.
+
+Customer detail page should include tabs:
+
+- Overview.
+- Orders.
+- Addresses.
+- Reviews.
+- Support.
+- Activity.
+
+Protect sensitive personal information.
+
+Only authorized roles should access information required for their duties.
+
+Do not expose prescription documents or unnecessary health information in general customer tables.
+
+---
+
+# 17. PAYMENTS AND REFUNDS
+
+Implement:
+
+- Payment overview.
+- Transactions.
+- Transaction details.
+- Refund requests.
+- Refund details.
+- Refund processing.
+- Payment reconciliation.
+
+Payment methods:
+- UPI.
+- Cards.
+- Net banking.
+- Wallets.
+- Cash on Delivery.
+
+Transaction fields:
+- Transaction ID.
+- Order ID.
+- Customer.
+- Payment method.
+- Amount.
+- Transaction date.
+- Payment status.
+- Gateway reference.
+
+Refund workflow:
+1. View request.
+2. Review order.
+3. Verify payment.
+4. Review refund amount.
+5. Approve or reject.
+6. Record processing state.
+7. Record refund reference.
+
+Do not claim that a refund has actually been sent unless the real payment provider confirms it.
+
+In demo mode, clearly label refund processing as simulated.
+
+Prevent duplicate refunds and refunds exceeding the eligible amount.
+
+---
+
+# 18. RETURNS AND CANCELLATIONS
+
+Implement:
+- Return listing.
+- Return details.
+- Cancellation listing.
+- Cancellation details.
+- Approval.
+- Rejection.
+- Refund linkage.
+
+Return records:
+- Request ID.
+- Order ID.
+- Customer.
+- Product.
+- Quantity.
+- Reason.
+- Supporting evidence.
+- Request date.
+- Approval status.
+- Refund status.
+
+Medicine return eligibility must be configurable according to applicable product categories and business policy.
+
+Do not assume every medicine can be returned.
+
+---
+
+# 19. DELIVERY MANAGEMENT
+
+Implement:
+- Delivery overview.
+- Shipment listing.
+- Shipment details.
+- Delivery partners.
+- Delivery zones.
+- Delivery status timeline.
+
+Shipment fields:
+- Shipment ID.
+- Order ID.
+- Customer.
+- Delivery partner.
+- Tracking number.
+- Expected delivery.
+- Delivery fee.
+- Current status.
+
+Support:
+- Shipment creation.
+- Shipment assignment.
+- Status updates.
+- Tracking timeline.
+- Delivery completion.
+- Failed delivery recording.
+
+If no real shipping integration exists, implement a clearly labeled simulated tracking workflow.
+
+---
+
+# 20. DOCTOR CONSULTATIONS
+
+Implement the secondary healthcare consultation module.
+
+Features:
+- Consultation dashboard.
+- Consultation listing.
+- Consultation details.
+- Doctor listing.
+- Doctor details.
+- Doctor creation.
+- Doctor editing.
+- Doctor availability.
+- Consultation scheduling.
+
+Consultation statuses:
+- Requested.
+- Scheduled.
+- Confirmed.
+- In Progress.
+- Completed.
+- Cancelled.
+
+Doctor information:
+- Name.
+- Qualification.
+- Specialization.
+- Experience.
+- Registration details.
+- Consultation fee.
+- Availability.
+- Profile status.
+
+Keep this module separate from medicine order fulfillment.
+
+Do not automatically create medical advice or clinical decisions.
+
+---
+
+# 21. MARKETING MANAGEMENT
+
+Implement:
+
+## Coupons
+
+- Create coupon.
+- Edit coupon.
+- Delete/archive coupon.
+- Enable/disable.
+- Minimum order amount.
+- Discount percentage.
+- Fixed discount.
+- Maximum discount.
+- Usage limit.
+- Customer usage limit.
+- Start date.
+- Expiry date.
+- Product restrictions.
+- Category restrictions.
+
+Validate coupon rules.
+
+## Campaigns
+
+Implement:
+- Campaign creation.
+- Campaign editing.
+- Campaign scheduling.
+- Campaign status.
+- Campaign performance.
+
+## Promotional Banners
+
+Implement:
+- Upload desktop image.
+- Upload mobile image.
+- Add heading.
+- Add subtitle.
+- CTA text.
+- Destination.
+- Schedule.
+- Activate/deactivate.
+- Preview.
+
+All marketing changes should update the relevant shared application data.
+
+---
+
+# 22. PRODUCT REVIEWS
+
+Implement:
+- Review listing.
+- Review details.
+- Reported reviews.
+- Review moderation.
+
+Actions:
+- Approve.
+- Hide.
+- Reject.
+- Flag.
+
+Review records:
+- Customer.
+- Product.
+- Rating.
+- Review text.
+- Date.
+- Moderation status.
+
+Update review statistics when moderation status changes, according to the chosen business rules.
+
+---
+
+# 23. CUSTOMER SUPPORT
+
+Implement:
+
+- Support dashboard.
+- Ticket listing.
+- Ticket details.
+- Assignment.
+- Reply interface.
+- Internal notes.
+- Status management.
+- Support categories.
+- Canned responses.
+
+Ticket statuses:
+- Open.
+- In Progress.
+- Waiting for Customer.
+- Resolved.
+- Closed.
+
+Ticket details should show:
+- Customer.
+- Subject.
+- Priority.
+- Category.
+- Related order.
+- Conversation history.
+- Attachments.
+- Assigned staff.
+- Internal notes.
+
+Record replies and status changes.
+
+In demo mode, clearly distinguish simulated message delivery from real email or SMS delivery.
+
+---
+
+# 24. NOTIFICATIONS
+
+Implement:
+
+- Notification center.
+- Notification templates.
+- Email templates.
+- SMS templates.
+- Push notification templates.
+- Notification history.
+
+Notification categories:
+- Order updates.
+- Payment updates.
+- Prescription updates.
+- Delivery updates.
+- Account updates.
+- Promotions.
+
+Implement notification creation and preview.
+
+If no provider is connected, store notification records locally or in the database as simulated messages.
+
+Never claim an email or SMS was delivered without confirmation from the provider.
+
+---
+
+# 25. ANALYTICS AND REPORTING
+
+Implement:
+
+- Sales analytics.
+- Revenue analytics.
+- Product performance.
+- Category performance.
+- Brand performance.
+- Customer analytics.
+- Inventory analytics.
+- Order analytics.
+- Payment analytics.
+- Prescription analytics.
+- Supplier analytics.
+- Report export center.
+
+All metrics must derive from application data.
+
+Implement:
+- Date filters.
+- Date comparisons.
+- Charts.
+- Tooltips.
+- Summary cards.
+- Data tables.
+- CSV exports.
+- PDF exports where supported.
+
+Use correct calculations.
+
+Examples:
+
+Total Revenue:
+Sum of eligible completed/recognized sales according to the defined business rules.
+
+Average Order Value:
+Eligible order revenue divided by eligible order count.
+
+Total Orders:
+Count of unique orders.
+
+Product Sales:
+Sum of quantities sold, accounting for cancellations and returns according to the reporting rules.
+
+Inventory Value:
+Sum of available stock multiplied by the selected valuation cost.
+
+Do not count the same transaction twice.
+
+Clearly define the reporting period and status filters.
+
+---
+
+# 26. STAFF AND ADMINISTRATION
+
+Implement:
+
+- Staff listing.
+- Staff details.
+- Invite staff.
+- Edit staff.
+- Deactivate staff.
+- Roles.
+- Permission matrix.
+- Activity logs.
+- Security events.
+
+Permission matrix should allow authorized administrators to manage:
+- View.
+- Create.
+- Edit.
+- Delete.
+- Approve.
+- Export.
+- Manage.
+
+Create audit logs for important actions:
+
+- Product creation.
+- Product editing.
+- Stock adjustment.
+- Purchase order approval.
+- Prescription review.
+- Order status changes.
+- Refund processing.
+- Staff changes.
+- Permission changes.
+- Settings updates.
+
+Each audit record should contain:
+- Actor.
+- Action.
+- Module.
+- Record ID.
+- Timestamp.
+- Result.
+- Relevant metadata.
+
+Audit logs should not be casually editable or deletable.
+
+---
+
+# 27. SETTINGS
+
+Implement the existing settings screens.
+
+Sections:
+- General settings.
+- Business information.
+- Store settings.
+- Currency and tax.
+- Shipping.
+- Payments.
+- Prescription settings.
+- Notifications.
+- Security.
+- Appearance.
+- SEO.
+- Integrations.
+
+Use INR as the default currency.
+
+Use Indian date and phone number conventions.
+
+Provide validation for business fields.
+
+Allow configuration changes to persist.
+
+Never expose secret API keys in frontend code.
+
+External integration settings should clearly distinguish configured, unconfigured, and demo states.
+
+---
+
+# 28. CENTRALIZED DATA MODEL
+
+Create typed, centralized data models.
+
+At minimum, implement:
+
+- AdminUser.
+- Role.
+- Permission.
+- Product.
+- ProductVariant.
+- Category.
+- Brand.
+- Inventory.
+- Batch.
+- Warehouse.
+- StockMovement.
+- StockTransfer.
+- Supplier.
+- PurchaseOrder.
+- GoodsReceipt.
+- Customer.
+- Address.
+- Order.
+- OrderItem.
+- Prescription.
+- PrescriptionReview.
+- Payment.
+- Refund.
+- ReturnRequest.
+- Shipment.
+- DeliveryPartner.
+- Doctor.
+- Consultation.
+- Coupon.
+- Campaign.
+- Banner.
+- ProductReview.
+- SupportTicket.
+- SupportMessage.
+- Notification.
+- ActivityLog.
+- BusinessSettings.
+
+Use unique IDs.
+
+Maintain proper relationships.
+
+Do not duplicate records unnecessarily.
+
+Use consistent timestamps.
+
+Use a centralized source of truth.
+
+---
+
+# 29. DATA SYNCHRONIZATION
+
+This is a very important requirement.
+
+All modules must use shared data services.
+
+Examples:
+
+When an administrator creates a product:
+- It appears in the product listing.
+- It appears in category filters.
+- It appears in brand filters.
+- It becomes available to inventory management.
+
+When inventory changes:
+- Stock counts update.
+- Low-stock indicators update.
+- Out-of-stock indicators update.
+- Inventory analytics update.
+- Dashboard statistics update.
+
+When an order is created:
+- Order listing updates.
+- Order statistics update.
+- Customer order history updates.
+- Inventory reservation logic runs.
+- Revenue reports update according to business rules.
+
+When an order is cancelled:
+- Applicable stock reservations are released.
+- Order status updates.
+- Customer order history updates.
+- Analytics are recalculated.
+
+When a prescription is approved:
+- Prescription status updates.
+- Order workflow updates according to applicable rules.
+- Review history is recorded.
+
+When a refund is processed:
+- Refund records update.
+- Payment records update.
+- Order financial summaries update.
+
+When a supplier purchase order is received:
+- Batch records are created or updated.
+- Inventory increases.
+- Supplier purchase history updates.
+
+Never create independent hardcoded data for individual pages.
+
+---
+
+# 30. MOCK DATA AND DEMONSTRATION MODE
+
+If no real backend is available, create a complete realistic demo environment.
+
+Seed the application with:
+
+- 50+ products.
+- 10+ categories.
+- 15+ brands.
+- 30+ customers.
+- 50+ orders.
+- 20+ prescription records.
+- 15+ suppliers.
+- 10+ batches.
+- Multiple warehouses.
+- 20+ payment records.
+- Refund requests.
+- Return requests.
+- Delivery records.
+- Doctors.
+- Consultations.
+- Coupons.
+- Banners.
+- Reviews.
+- Support tickets.
+- Staff accounts.
+- Activity logs.
+
+Use realistic Indian business information.
+
+Examples:
+- Currency: INR.
+- Cities: Bengaluru, Mangaluru, Mumbai, Pune, Chennai, Hyderabad, Kochi.
+- Payment methods: UPI, cards, net banking, COD.
+- Date format: DD MMM YYYY.
+- Phone format: Indian mobile number format.
+
+Example product records:
+- Paracetamol 500mg.
+- Vitamin C Tablets.
+- Digital Thermometer.
+- Blood Pressure Monitor.
+- ORS Sachets.
+- Glucose Monitoring Strips.
+- Multivitamin Tablets.
+
+All data must be illustrative.
+
+Do not use actual customer medical records.
+
+Persist demo data across page reloads.
+
+Provide a safe way to reset demo data to its initial seeded state.
+
+Avoid resetting the data automatically every time the application starts.
+
+---
+
+# 31. EVERY BUTTON MUST WORK
+
+Perform a complete interaction audit.
+
+Do not leave any dead controls.
+
+Every visible button must have a defined action.
+
+Examples:
+
+- Add Product → Opens the product form.
+- Save Product → Validates and saves the product.
+- Edit → Opens the existing record for editing.
+- Delete → Opens confirmation and deletes or archives the record.
+- Search → Filters relevant records.
+- Filter → Applies selected filters.
+- Reset → Clears filters.
+- Export → Downloads the appropriate file.
+- View → Opens the correct detail page.
+- Approve → Performs the authorized approval workflow.
+- Reject → Requires a reason and updates the record.
+- Assign → Updates the assigned staff member.
+- Print Invoice → Opens a printable invoice.
+- Notifications → Opens the notification center.
+- Profile → Opens the profile menu.
+- Logout → Ends the session.
+
+If an action requires an unavailable external integration, show a clear configuration message rather than pretending the operation succeeded.
+
+---
+
+# 32. FORM VALIDATION
+
+Every form must have appropriate validation.
+
+Implement:
+
+- Required field validation.
+- Email validation.
+- Phone validation.
+- Numeric validation.
+- Date validation.
+- Price validation.
+- Quantity validation.
+- Duplicate SKU prevention.
+- Invalid file prevention.
+- Date range validation.
+- Business rule validation.
+
+Show inline error messages.
+
+Do not rely only on alert boxes.
+
+Preserve entered form values when validation fails.
+
+Prevent accidental double submission.
+
+Show loading states during saves.
+
+Show success messages after successful operations.
+
+Show useful error messages when an operation fails.
+
+---
+
+# 33. UI/UX AND INTERACTION QUALITY
+
+Preserve the Google Stitch UI while implementing:
+
+- Loading skeletons.
+- Empty states.
+- Error states.
+- Success states.
+- Toast notifications.
+- Confirmation dialogs.
+- Search overlays.
+- Dropdown menus.
+- Side drawers.
+- Form validation.
+- Responsive tables.
+- Pagination.
+- Sorting.
+- Filters.
+- Date pickers.
+- Image previews.
+- File upload progress where supported.
+- Tooltips.
+- Chart tooltips.
+- Smooth navigation.
+- Subtle animations.
+
+Use Framer Motion only if compatible with the existing project and where it improves the experience.
+
+Avoid excessive animations.
+
+Respect reduced-motion preferences.
+
+Maintain keyboard accessibility.
+
+Provide clear focus states.
+
+Ensure adequate contrast.
+
+Make the application comfortable for staff using it throughout the day.
+
+---
+
+# 34. RESPONSIVE DESIGN
+
+The entire admin website must work on:
+
+- 360px mobile.
+- 390px mobile.
+- 768px tablet.
+- 1024px laptop.
+- 1280px desktop.
+- 1440px desktop.
+
+Preserve the existing Stitch responsive design wherever available.
+
+Check:
+
+- Sidebar behavior.
+- Header behavior.
+- Navigation drawer.
+- Table overflow.
+- Card stacking.
+- Form layouts.
+- Modal sizing.
+- Drawer sizing.
+- Chart responsiveness.
+- Button placement.
+- Typography.
+- Horizontal overflow.
+
+Do not allow important controls to disappear on mobile.
+
+Do not simply scale the desktop page down.
+
+Adapt layouts appropriately.
+
+---
+
+# 35. SECURITY AND DATA INTEGRITY
+
+Implement sensible security boundaries.
+
+Important:
+
+1. Never expose secrets in frontend code.
+2. Never store plaintext passwords.
+3. Protect sensitive documents.
+4. Restrict access based on permissions.
+5. Validate input.
+6. Prevent duplicate submissions.
+7. Validate stock changes.
+8. Validate payment and refund amounts.
+9. Prevent unauthorized prescription approval.
+10. Keep audit history for sensitive operations.
+11. Prevent invalid order transitions.
+12. Do not expose customer medical information unnecessarily.
+
+If a real backend is connected, enforce security rules on the server, not only in React.
+
+Client-side validation is not a substitute for backend validation.
+
+Do not claim the application is production-secure simply because these frontend controls exist.
+
+---
+
+# 36. ERROR HANDLING AND RELIABILITY
+
+Implement:
+
+- Global error boundary.
+- Page-level error states.
+- API error handling.
+- Loading indicators.
+- Retry actions where appropriate.
+- Empty states.
+- Network failure handling.
+- Form submission protection.
+- Invalid route handling.
+- Not-found page.
+
+The application should not crash when:
+- A record does not exist.
+- An image fails to load.
+- A request fails.
+- A filter returns no results.
+- A user lacks permission.
+- A form contains invalid data.
+- A record is deleted while another page is open.
+
+Provide meaningful feedback.
+
+Do not hide errors silently.
+
+---
+
+# 37. PERFORMANCE
+
+Implement:
+
+- Reusable components.
+- Efficient rendering.
+- Pagination for large datasets.
+- Debounced search.
+- Lazy loading for appropriate routes.
+- Optimized images.
+- Avoid unnecessary re-renders.
+- Efficient derived statistics.
+- Proper state management.
+
+Do not load every large dataset unnecessarily on every page.
+
+Use server-side pagination and filtering when connected to a real backend.
+
+---
+
+# 38. TESTING AND QUALITY ASSURANCE
+
+After implementation, verify the entire application.
+
+Run the available project scripts.
+
+Fix:
+- TypeScript errors.
+- Build errors.
+- Missing imports.
+- Broken routes.
+- Runtime errors.
+- Console errors.
+- Invalid form behavior.
+- Broken images.
+- Duplicate IDs.
+- Incorrect calculations.
+- Dead buttons.
+- Stale data.
+- Permission issues.
+- Responsive layout problems.
+
+Test important workflows.
+
+### Workflow A: Product Management
+
+1. Open Products.
+2. Add a new product.
+3. Validate the form.
+4. Save it.
+5. Confirm it appears in the product listing.
+6. Edit it.
+7. Confirm changes persist.
+8. Archive it.
+9. Confirm it no longer appears as an active product.
+
+### Workflow B: Inventory
+
+1. Open Inventory.
+2. Create or receive a batch.
+3. Confirm stock increases.
+4. Perform a stock adjustment.
+5. Confirm stock movement history updates.
+6. Check low-stock alerts.
+7. Check expiry indicators.
+
+### Workflow C: Purchase Orders
+
+1. Create a purchase order.
+2. Add supplier and products.
+3. Submit for approval.
+4. Approve it.
+5. Record goods received.
+6. Confirm inventory and batches update.
+
+### Workflow D: Orders
+
+1. Open Orders.
+2. Open an order.
+3. Update its status.
+4. Confirm timeline changes.
+5. Confirm dashboard statistics update.
+6. Confirm customer order history updates.
+
+### Workflow E: Prescriptions
+
+1. Open pending prescriptions.
+2. Assign a pharmacist.
+3. Open the review workspace.
+4. Review a sample document.
+5. Approve or reject it with the appropriate permissions.
+6. Confirm review history updates.
+7. Confirm related order workflow updates correctly.
+
+### Workflow F: Payments
+
+1. Open transactions.
+2. Open a transaction.
+3. Create a refund request.
+4. Review and process the refund in demo mode.
+5. Confirm financial summaries update.
+
+### Workflow G: Permissions
+
+1. Log in as a role with limited access.
+2. Confirm unauthorized pages cannot be accessed.
+3. Confirm unauthorized actions are hidden or blocked.
+4. Log in as an administrator.
+5. Confirm authorized functionality is available.
+
+### Workflow H: Persistence
+
+1. Create a record.
+2. Reload the page.
+3. Confirm the record remains.
+4. Edit it.
+5. Reload again.
+6. Confirm the update remains.
+
+---
+
+# 39. IMPLEMENTATION EXECUTION PLAN
+
+Implement the complete application in structured phases.
+
+Do not try to generate everything in one giant component.
+
+Do not stop after completing the dashboard.
+
+### PHASE 1 — PROJECT FOUNDATION
+
+- Inspect the entire project.
+- Establish application architecture.
+- Configure routing.
+- Establish centralized state.
+- Establish data models.
+- Establish service layer.
+- Implement authentication.
+- Implement role permissions.
+- Implement global error handling.
+- Preserve the Stitch layout.
+
+### PHASE 2 — DASHBOARD AND CATALOGUE
+
+- Dashboard.
+- Products.
+- Product details.
+- Add/edit product.
+- Categories.
+- Brands.
+- Product images.
+- Search and filtering.
+
+### PHASE 3 — INVENTORY AND PROCUREMENT
+
+- Inventory overview.
+- Stock management.
+- Batches.
+- Expiry.
+- Stock adjustments.
+- Stock transfers.
+- Warehouses.
+- Suppliers.
+- Purchase orders.
+- Goods received.
+
+### PHASE 4 — ORDERS AND PRESCRIPTIONS
+
+- Order listing.
+- Order details.
+- Order timeline.
+- Invoice.
+- Packing slip.
+- Prescription dashboard.
+- Prescription listing.
+- Review workspace.
+- Pharmacist assignment.
+
+### PHASE 5 — CUSTOMERS AND FINANCE
+
+- Customers.
+- Customer details.
+- Payments.
+- Transactions.
+- Refunds.
+- Returns.
+- Cancellations.
+- Delivery management.
+
+### PHASE 6 — HEALTHCARE AND MARKETING
+
+- Doctor management.
+- Consultations.
+- Coupons.
+- Campaigns.
+- Banners.
+- Reviews.
+- Support.
+- Notifications.
+
+### PHASE 7 — ANALYTICS AND ADMINISTRATION
+
+- Analytics.
+- Reports.
+- Staff management.
+- Roles.
+- Permissions.
+- Activity logs.
+- Settings.
+
+### PHASE 8 — FINAL TESTING AND POLISH
+
+- Test every route.
+- Test every form.
+- Test every workflow.
+- Verify calculations.
+- Verify persistence.
+- Verify role permissions.
+- Fix responsive issues.
+- Fix all build errors.
+- Remove dead controls.
+- Improve performance.
+
+Complete each phase before moving on.
+
+Preserve all working code and design decisions from earlier phases.
+
+---
+
+# 40. DEVELOPMENT RULES
+
+These rules are mandatory:
+
+1. Inspect before modifying.
+2. Preserve the Stitch UI.
+3. Reuse existing components.
+4. Use centralized data models.
+5. Use a centralized service layer.
+6. Use proper TypeScript types.
+7. Keep business logic outside presentation components.
+8. Avoid duplicate functionality.
+9. Implement real state changes.
+10. Persist changes.
+11. Validate every form.
+12. Implement permission checks.
+13. Maintain data consistency.
+14. Handle errors.
+15. Test every important workflow.
+16. Do not leave placeholder pages.
+17. Do not leave dead buttons.
+18. Do not hardcode dashboard statistics.
+19. Do not pretend mock integrations are real.
+20. Do not stop after the first phase.
+
+If you encounter generation or context limits, continue from the last completed task.
+
+Before continuing, inspect the existing implementation to avoid duplicating already completed functionality.
+
+Do not discard existing work.
+
+---
+
+# 41. FINAL ACCEPTANCE CRITERIA
+
+The project is complete only when:
+
+- Every designed page has been implemented.
+- All existing Stitch designs have been preserved.
+- All routes work.
+- All navigation works.
+- All visible buttons perform their intended actions.
+- All important forms work.
+- All CRUD operations work.
+- Data is synchronized across modules.
+- Data persists after reload in demo mode.
+- Dashboard values are calculated from actual application data.
+- Inventory calculations are correct.
+- Batch expiry logic works.
+- FEFO allocation is implemented where applicable.
+- Order status transitions are validated.
+- Prescription approval is permission-controlled.
+- Payment and refund workflows work in the selected mode.
+- Staff permissions work.
+- Audit logs record important operations.
+- Reports use correct calculations.
+- Mobile and desktop layouts work.
+- There are no unresolved build errors.
+- There are no critical runtime errors.
+- There are no obvious dead buttons or placeholder pages.
+
+The final result should look and behave like a professional pharmacy operations platform.
+
+---
+
+# FINAL INSTRUCTION
+
+Start by thoroughly inspecting all the files in the existing Google Stitch-exported project.
+
+Understand the complete UI and existing architecture.
+
+Then implement the entire MediCare admin website.
+
+Do not create a new design.
+
+Do not replace existing screens.
+
+Do not provide only a plan or explanation.
+
+Work directly on the existing project files and implement the actual application.
+
+Preserve the visual quality of Google Stitch while adding complete functionality, real state management, realistic data, validation, persistence, permissions, operational workflows, and reliable error handling.
+
+The final goal is a complete, attractive, responsive, maintainable, and fully functional MediCare pharmacy administration website.
